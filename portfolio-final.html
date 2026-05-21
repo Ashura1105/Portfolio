@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jisun Junayed — CSE @ DIU</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --ink: #0e0e0e;
+      --paper: #f5f0e8;
+      --cream: #ede7d4;
+      --gold: #c8a84b;
+      --rust: #b94a2c;
+      --teal: #1a6b68;
+      --muted: #6b6455;
+      --rule: 1px solid rgba(14, 14, 14, 0.15);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(245, 240, 232, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: var(--rule);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.12em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--rust);
+    }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 10rem 3rem 5rem;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s ease forwards;
+    }
+
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 9vw, 8rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      opacity: 0;
+      animation: fadeUp 0.9s 0.4s ease forwards;
+    }
+
+    .hero-name span {
+      color: var(--gold);
+    }
+
+    .hero-tagline {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      color: var(--muted);
+      margin-top: 1.5rem;
+      max-width: 380px;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.6s ease forwards;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      gap: 1rem;
+      margin-top: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.8s ease forwards;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: var(--ink);
+      color: var(--paper);
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.25s;
+    }
+
+    .btn-primary:hover {
+      background: var(--rust);
+    }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border: 1px solid var(--ink);
+      color: var(--ink);
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--rust);
+      color: var(--rust);
+    }
+
+    .hero-right {
+      background: var(--cream);
+      border-left: var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-right::after {
+      content: 'JJ';
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 30vw;
+      color: rgba(14, 14, 14, 0.04);
+      position: absolute;
+      letter-spacing: -0.05em;
+      user-select: none;
+    }
+
+    .hero-photo-wrap {
+      position: relative;
+      z-index: 2;
+      width: 320px;
+      height: 400px;
+      opacity: 0;
+      animation: fadeIn 1.2s 1s ease forwards;
+    }
+
+    .hero-photo-border {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      width: 100%;
+      height: 100%;
+      border: 2px solid var(--gold);
+    }
+
+    .hero-photo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .avatar-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 8rem;
+      color: rgba(255, 255, 255, 0.4);
+      background: linear-gradient(160deg, #c8b89a 0%, #8a6a44 100%);
+    }
+
+    /* MARQUEE */
+    .marquee-strip {
+      border-top: var(--rule);
+      border-bottom: var(--rule);
+      overflow: hidden;
+      padding: 0.8rem 0;
+      background: var(--ink);
+    }
+
+    .marquee-inner {
+      display: flex;
+      gap: 3rem;
+      animation: marquee 18s linear infinite;
+      white-space: nowrap;
+    }
+
+    .marquee-inner span {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      color: var(--paper);
+      opacity: 0.7;
+    }
+
+    .marquee-inner .dot {
+      color: var(--gold);
+      opacity: 1;
+      font-size: 0.8rem;
+    }
+
+    /* SECTIONS */
+    section {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      line-height: 1;
+      letter-spacing: 0.03em;
+      color: var(--ink);
+      margin-bottom: 3rem;
+    }
+
+    hr.divider {
+      border: none;
+      border-top: var(--rule);
+    }
+
+    /* ABOUT */
+    #about {
+      background: var(--paper);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      font-size: 1.08rem;
+      line-height: 1.8;
+      color: var(--ink);
+      margin-bottom: 1.4rem;
+    }
+
+    .about-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      border: var(--rule);
+      padding: 1.6rem 1.4rem;
+      background: var(--cream);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 4px 8px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+
+    /* SKILLS */
+    #skills {
+      background: var(--cream);
+      border-top: var(--rule);
+      border-bottom: var(--rule);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .skill-group h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--gold);
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.8rem;
+      border: 1px solid rgba(14, 14, 14, 0.2);
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+
+    .skill-tag:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
+    /* JOURNEY */
+    #journey {
+      background: var(--paper);
+    }
+
+    .timeline {
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 140px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold) 10%, var(--gold) 90%, transparent);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 3rem;
+      padding-bottom: 3.5rem;
+      position: relative;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-year {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      color: var(--gold);
+      text-align: right;
+      padding-top: 0.1rem;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 135px;
+      top: 0.4rem;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--rust);
+      border: 2px solid var(--paper);
+      box-shadow: 0 0 0 1px var(--rust);
+    }
+
+    .timeline-body h4 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-body p {
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.7;
+    }
+
+    /* ACHIEVEMENTS */
+    #achievements {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    #achievements .section-title {
+      color: var(--paper);
+    }
+
+    #achievements .section-label {
+      color: var(--gold);
+    }
+
+    .ach-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .ach-card {
+      padding: 2.5rem 2rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ach-card:hover {
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .ach-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .ach-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .ach-date {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .ach-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+
+    .ach-org {
+      font-size: 0.8rem;
+      color: rgba(245, 240, 232, 0.45);
+    }
+
+    /* CERTIFICATES */
+    #certificates {
+      background: var(--cream);
+      border-top: var(--rule);
+      border-bottom: var(--rule);
+    }
+
+    .cert-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.3rem 0;
+      border-bottom: var(--rule);
+      text-decoration: none;
+      color: var(--ink);
+      transition: padding-left 0.25s;
+    }
+
+    .cert-item:hover {
+      padding-left: 0.8rem;
+    }
+
+    .cert-item:hover .cert-arrow {
+      color: var(--rust);
+      transform: translateX(4px);
+    }
+
+    .cert-name {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .cert-issuer {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.15rem;
+    }
+
+    .cert-arrow {
+      font-size: 1.2rem;
+      color: var(--muted);
+      transition: all 0.25s;
+      flex-shrink: 0;
+    }
+
+    /* STRENGTHS */
+    #strengths {
+      background: var(--paper);
+    }
+
+    .strengths-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .strength-item {
+      position: relative;
+      padding: 2rem 1.5rem;
+      border: var(--rule);
+      transition: transform 0.3s, box-shadow 0.3s;
+      overflow: hidden;
+    }
+
+    .strength-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    .strength-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      color: rgba(14, 14, 14, 0.05);
+      position: absolute;
+      top: 0.5rem;
+      right: 0.8rem;
+      line-height: 1;
+    }
+
+    .strength-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* GOALS */
+    #goals {
+      background: var(--teal);
+      color: var(--paper);
+    }
+
+    #goals .section-title {
+      color: var(--paper);
+    }
+
+    #goals .section-label {
+      color: rgba(200, 168, 75, 0.9);
+    }
+
+    .goals-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .goal-card {
+      padding: 1.8rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: background 0.3s;
+    }
+
+    .goal-card:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .goal-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .goal-text {
+      font-size: 0.97rem;
+      line-height: 1.6;
+      color: rgba(245, 240, 232, 0.88);
+    }
+
+    /* CONTACT */
+    #contact {
+      background: var(--paper);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-intro {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      line-height: 1.5;
+      color: var(--ink);
+      margin-bottom: 2rem;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-detail-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .contact-detail-text a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .contact-detail-text a:hover {
+      color: var(--rust);
+    }
+
+    .contact-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .contact-value {
+      font-size: 0.95rem;
+      margin-top: 0.1rem;
+    }
+
+    .social-row {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border: var(--rule);
+      color: var(--ink);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .social-link:hover {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: var(--rule);
+      padding: 1.8rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--cream);
+    }
+
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.12em;
+    }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      #hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-right {
+        display: none;
+      }
+
+      .hero-left {
+        padding: 8rem 1.5rem 4rem;
+      }
+
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .ach-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .strengths-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .goals-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline::before {
+        left: 90px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 80px 1fr;
+        gap: 1.5rem;
+      }
+
+      .timeline-dot {
+        left: 85px;
+      }
+
+      .timeline-year {
+        font-size: 1.2rem;
+      }
+
+      .section-inner {
+        padding: 4rem 1.5rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links {
+        display: none;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .strengths-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 0.8rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">Jisun Junayed</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#achievements">Achievements</a></li>
+      <li><a href="#certificates">Certificates</a></li>
+      <li><a href="#goals">Goals</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Portfolio · CSE Student · Innovator</p>
+      <h1 class="hero-name">Jisun<br><span>Junayed</span></h1>
+      <p class="hero-tagline">Bridging technology &amp; creativity — building tomorrow's solutions today.</p>
+      <div class="hero-cta-row">
+        <a href="#about" class="btn-primary">Explore Portfolio</a>
+        <a href="#contact" class="btn-outline">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-photo-wrap">
+        <div class="hero-photo-border">
+          <img src="photo.jpg" class="hero-photo-img" alt="Jisun Junayed"
+            style="width:100%;height:400px;object-fit:cover;display:block;position:relative;z-index:1" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip">
+    <div class="marquee-inner">
+      <span>Computer Science &amp; Engineering</span><span class="dot">◆</span>
+      <span>Daffodil International University</span><span class="dot">◆</span>
+      <span>Python · C++ · Java · SQL</span><span class="dot">◆</span>
+      <span>AWS Certified</span><span class="dot">◆</span>
+      <span>AI &amp; ML Enthusiast</span><span class="dot">◆</span>
+      <span>Tech Entrepreneur</span><span class="dot">◆</span>
+      <span>Computer Science &amp; Engineering</span><span class="dot">◆</span>
+      <span>Daffodil International University</span><span class="dot">◆</span>
+      <span>Python · C++ · Java · SQL</span><span class="dot">◆</span>
+      <span>AWS Certified</span><span class="dot">◆</span>
+      <span>AI &amp; ML Enthusiast</span><span class="dot">◆</span>
+      <span>Tech Entrepreneur</span><span class="dot">◆</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <p class="section-label reveal">01 — About</p>
+      <h2 class="section-title reveal">Who I Am</h2>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>Assalamu-Alaikum. I'm <strong>Jisun Junayed</strong> — a 3rd year Computer Science &amp; Engineering
+            student at Daffodil International University (Batch 232), currently in my 6th semester.</p>
+          <p>With a unique blend of technical expertise and marketing acumen, I'm passionate about technology's endless
+            potential to transform lives. I'm equally drawn to software development and digital strategy — making me
+            someone who can bridge the gap between building and communicating value.</p>
+          <p>I completed my SSC from Bangladesh Bank Adarsha High School (GPA 4.89, 2019) and my HSC from Kabi Nazrul
+            Govt. College (GPA 5.00, 2021). I'm currently collaborating with peers on a research publication and
+            planning to pursue higher education abroad on a scholarship.</p>
+        </div>
+        <div class="about-stats reveal">
+          <div class="stat-card">
+            <div class="stat-number">5.00</div>
+            <div class="stat-label">HSC GPA — Kabi Nazrul Govt. College</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">3rd</div>
+            <div class="stat-label">Year at DIU — CSE Department</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">6+</div>
+            <div class="stat-label">Languages &amp; Technologies</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">7+</div>
+            <div class="stat-label">Certificates Earned</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr class="divider" />
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-inner">
+      <p class="section-label reveal">02 — Expertise</p>
+      <h2 class="section-title reveal">Skills &amp; Tools</h2>
+      <div class="skills-grid">
+        <div class="skill-group reveal">
+          <h3>Languages</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">C</span>
+            <span class="skill-tag">C++</span>
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">HTML</span>
+            <span class="skill-tag">SQL</span>
+          </div>
+        </div>
+        <div class="skill-group reveal">
+          <h3>Tools &amp; Platforms</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Cisco Packet Tracer</span>
+            <span class="skill-tag">XAMPP</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">VS Code</span>
+            <span class="skill-tag">Codeblocks</span>
+            <span class="skill-tag">Apache NetBeans</span>
+            <span class="skill-tag">MySQL</span>
+          </div>
+        </div>
+        <div class="skill-group reveal">
+          <h3>Core Knowledge</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Problem Solving</span>
+            <span class="skill-tag">Database Management</span>
+            <span class="skill-tag">Networking Basics</span>
+            <span class="skill-tag">Digital Electronics</span>
+            <span class="skill-tag">SEO &amp; Analytics</span>
+            <span class="skill-tag">Digital Marketing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOURNEY -->
+  <section id="journey">
+    <div class="section-inner">
+      <p class="section-label reveal">03 — Career Map</p>
+      <h2 class="section-title reveal">My Journey</h2>
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="timeline-year">2019</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <h4>SSC — Foundation Years</h4>
+            <p>Completed SSC from Bangladesh Bank Adarsha High School, Faridabad, Dhaka with a GPA of 4.89. Began
+              discovering a passion for technology and logical thinking.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-year">2021</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <h4>HSC — Academic Excellence</h4>
+            <p>Achieved a perfect GPA of 5.00 at Kabi Nazrul Govt. College, Dhaka. Solidified academic discipline and
+              set the stage for a university CSE journey.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-year">1st Yr</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <h4>DIU — Foundation &amp; Exploration</h4>
+            <p>Learned fundamentals of programming in C, problem-solving techniques, and explored computer science
+              concepts. Began identifying core areas of interest.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-year">2nd Yr</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <h4>Skill Building &amp; Real Projects</h4>
+            <p>Advanced skills in MySQL and Python. Worked on team projects, explored networking with Cisco Packet
+              Tracer, and started planning research publications with faculty.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-year">Now</div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-body">
+            <h4>3rd Year — Research &amp; Innovation</h4>
+            <p>Collaborating on a research paper publication, diving into advanced CSE subjects, earning industry
+              certifications (AWS, AI, Microsoft), and building toward a scholarship for higher education abroad.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements">
+    <div class="section-inner">
+      <p class="section-label reveal">04 — Recognition</p>
+      <h2 class="section-title reveal">Achievements</h2>
+      <div class="ach-grid">
+        <div class="ach-card reveal">
+          <div class="ach-date">June 2023</div>
+          <div class="ach-title">Champion — "Feedback N' Win"</div>
+          <div class="ach-org">DSA · Daffodil International University</div>
+        </div>
+        <div class="ach-card reveal">
+          <div class="ach-date">Fall 2023</div>
+          <div class="ach-title">Ranked 9th — Take-off Programming Contest</div>
+          <div class="ach-org">Daffodil International University</div>
+        </div>
+        <div class="ach-card reveal">
+          <div class="ach-date">May 2018</div>
+          <div class="ach-title">Best Project — Inter School Science Fair</div>
+          <div class="ach-org">Science Fair Showcase · Dhaka</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATES -->
+  <section id="certificates">
+    <div class="section-inner">
+      <p class="section-label reveal">05 — Credentials</p>
+      <h2 class="section-title reveal">Certificates</h2>
+      <div class="reveal">
+        <a class="cert-item" href="https://verify.certs365.io/?=4419f3faed7d" target="_blank" rel="noopener">
+          <div>
+            <div class="cert-name">AI+ Prompt Engineer Level 1™</div>
+            <div class="cert-issuer">Agent X · Certs365</div>
+          </div>
+          <span class="cert-arrow">→</span>
+        </a>
+        <a class="cert-item" href="https://www.credly.com/go/kpsxiBTu" target="_blank" rel="noopener">
+          <div>
+            <div class="cert-name">AWS Academy Cloud Foundations</div>
+            <div class="cert-issuer">Amazon Web Services · Credly</div>
+          </div>
+          <span class="cert-arrow">→</span>
+        </a>
+        <a class="cert-item"
+          href="https://learn.microsoft.com/api/achievements/share/en-us/JisunJunayed-6434/8ZPSYGFW?sharingId=D1635914FB4E5305"
+          target="_blank" rel="noopener">
+          <div>
+            <div class="cert-name">Introduction to Microsoft 365 Copilot</div>
+            <div class="cert-issuer">Microsoft Learn</div>
+          </div>
+          <span class="cert-arrow">→</span>
+        </a>
+        <a class="cert-item" href="https://goedu.ac/certificates/91d652fff00129fcc7a2f1b5b7360290" target="_blank"
+          rel="noopener">
+          <div>
+            <div class="cert-name">Leadership Qualities — Boss VS Leader</div>
+            <div class="cert-issuer">Dr. Md. Sabur Khan · GoEdu</div>
+          </div>
+          <span class="cert-arrow">→</span>
+        </a>
+        <a class="cert-item" href="https://goedu.ac/certificates/b849967e4c82e0fbc0aa5ab9aac65d46" target="_blank"
+          rel="noopener">
+          <div>
+            <div class="cert-name">Soft Skill and Hard Skill</div>
+            <div class="cert-issuer">Dr. Md. Sabur Khan · GoEdu</div>
+          </div>
+          <span class="cert-arrow">→</span>
+        </a>
+        <a class="cert-item" href="https://goedu.ac/certificates/70615fbc6f09f8b4eb19c1bacd4a595a" target="_blank"
+          rel="noopener">
+          <div>
+            <div class="cert-name">ICT Industry in Bangladesh and AI</div>
+            <div class="cert-issuer">Saida Mahamuda Rahman · GoEdu</div>
+          </div>
+          <span class="cert-arrow">→</span>
+        </a>
+        <a class="cert-item" href="https://goedu.ac/profile/Ashura_CSE105/certificates" target="_blank" rel="noopener">
+          <div>
+            <div class="cert-name">Additional GoEdu Courses</div>
+            <div class="cert-issuer">GoEdu · Various Instructors</div>
+          </div>
+          <span class="cert-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRENGTHS -->
+  <section id="strengths">
+    <div class="section-inner">
+      <p class="section-label reveal">06 — Character</p>
+      <h2 class="section-title reveal">Strengths</h2>
+      <div class="strengths-grid">
+        <div class="strength-item reveal">
+          <div class="strength-num">01</div>
+          <div class="strength-name">Leadership</div>
+        </div>
+        <div class="strength-item reveal">
+          <div class="strength-num">02</div>
+          <div class="strength-name">Problem Solving</div>
+        </div>
+        <div class="strength-item reveal">
+          <div class="strength-num">03</div>
+          <div class="strength-name">SEO &amp; Data Analytics</div>
+        </div>
+        <div class="strength-item reveal">
+          <div class="strength-num">04</div>
+          <div class="strength-name">Creativity</div>
+        </div>
+        <div class="strength-item reveal">
+          <div class="strength-num">05</div>
+          <div class="strength-name">Teamwork</div>
+        </div>
+        <div class="strength-item reveal">
+          <div class="strength-num">06</div>
+          <div class="strength-name">Digital Marketing</div>
+        </div>
+        <div class="strength-item reveal">
+          <div class="strength-num">07</div>
+          <div class="strength-name">Critical Thinking</div>
+        </div>
+        <div class="strength-item reveal">
+          <div class="strength-num">08</div>
+          <div class="strength-name">Negotiating Skill</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GOALS -->
+  <section id="goals">
+    <div class="section-inner">
+      <p class="section-label reveal">07 — Vision</p>
+      <h2 class="section-title reveal">Future Goals</h2>
+      <div class="goals-grid">
+        <div class="goal-card reveal">
+          <div class="goal-icon">🚀</div>
+          <div class="goal-text">Become a successful technology entrepreneur and launch my own business in the
+            technology sector.</div>
+        </div>
+        <div class="goal-card reveal">
+          <div class="goal-icon">🎓</div>
+          <div class="goal-text">Pursue higher education abroad on a scholarship to gain international exposure and
+            knowledge.</div>
+        </div>
+        <div class="goal-card reveal">
+          <div class="goal-icon">🤖</div>
+          <div class="goal-text">Explore research areas like Generative AI and learn essential Machine Learning
+            frameworks.</div>
+        </div>
+        <div class="goal-card reveal">
+          <div class="goal-icon">📺</div>
+          <div class="goal-text">Start a YouTube channel to share knowledge and build a community around technology and
+            innovation.</div>
+        </div>
+        <div class="goal-card reveal">
+          <div class="goal-icon">🔬</div>
+          <div class="goal-text">Gain experience in human informatics and develop deep knowledge in computer
+            architecture.</div>
+        </div>
+        <div class="goal-card reveal">
+          <div class="goal-icon">🌍</div>
+          <div class="goal-text">Contribute to the global tech ecosystem and travel the world to broaden my perspective.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <p class="section-label reveal">08 — Connect</p>
+      <h2 class="section-title reveal">Get in Touch</h2>
+      <div class="contact-grid">
+        <div class="reveal">
+          <p class="contact-intro">"Let's build something remarkable together — reach out and let's start the
+            conversation."</p>
+          <div class="social-row">
+            <a class="social-link" href="https://www.linkedin.com/in/jisunjunayed" target="_blank" rel="noopener"
+              title="LinkedIn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+            </a>
+            <a class="social-link" href="https://www.facebook.com/share/1Bp9RigMR5/" target="_blank" rel="noopener"
+              title="Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+              </svg>
+            </a>
+            <a class="social-link" href="https://www.youtube.com/@jisunjunayed" target="_blank" rel="noopener"
+              title="YouTube">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📧</div>
+            <div class="contact-detail-text">
+              <div class="contact-label">Email</div>
+              <div class="contact-value"><a href="mailto:jisunjunayedyt@gmail.com">jisunjunayedyt@gmail.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📱</div>
+            <div class="contact-detail-text">
+              <div class="contact-label">Phone</div>
+              <div class="contact-value"><a href="tel:+8801715782984">0171*******</a></div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">🏠</div>
+            <div class="contact-detail-text">
+              <div class="contact-label">Address</div>
+              <div class="contact-value">Gendaria, Faridabad, Dhaka-1204, Bangladesh</div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">🎓</div>
+            <div class="contact-detail-text">
+              <div class="contact-label">University</div>
+              <div class="contact-value">Daffodil International University — CSE, Batch 232</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Jisun Junayed</div>
+    <div class="footer-copy">© 2025 · Daffodil International University · CSE</div>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 60);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+</body>
+
+</html>
